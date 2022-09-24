@@ -4,7 +4,7 @@ import BaseButton from "./BaseButton";
 
 const ErrorModal = (props) => {
     return (
-        <div>
+        <>
             <div className={styles.backdrop} onClick={props.onDismissModal}/>
             <BaseCard className={styles.modal}>
                 <header className={styles.header}>
@@ -17,7 +17,7 @@ const ErrorModal = (props) => {
                     <BaseButton type="button" onClick={props.onDismissModal}>Okay</BaseButton>
                 </footer>
             </BaseCard>
-        </div>
+        </>
 
     )
 }

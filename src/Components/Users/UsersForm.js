@@ -45,7 +45,7 @@ const UsersForm = (props) => {
     }
 
     return (
-        <div>
+        <>
             {error && <ErrorModal title={error.title} message={error.message} onDismissModal={handleDismissModal}/>}
             <BaseCard className={styles.input}>
                 <form onSubmit={handleAddUser}>
@@ -56,7 +56,7 @@ const UsersForm = (props) => {
                     <BaseButton type="submit">Add User</BaseButton>
                 </form>
             </BaseCard>
-        </div>
+        </>
     )
 }
 

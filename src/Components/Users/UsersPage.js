@@ -20,10 +20,10 @@ const UsersPage = () => {
     }
 
     return (
-        <div>
+        <>
             <UsersForm onAddUser={handleAddUser}/>
             {users.length && <UsersList users={users}/>}
-        </div>
+        </>
     )
 }
 
