@@ -1,24 +1,19 @@
 import BaseCard from "../UI/BaseCard";
 import BaseButton from "../UI/BaseButton";
 import styles from './UsersForm.module.css'
-import {useState} from "react";
+import {useRef, useState} from "react";
 import ErrorModal from "../UI/ErrorModal";
 
 const UsersForm = (props) => {
-    const [username, setUsername] = useState('')
-    const [age, setAge] = useState('')
     const [error, setError] = useState(null)
 
-    const handleChangeUsername = (e) => {
-        setUsername(e.target.value)
-    }
-
-    const handleChangeAge = (e) => {
-        setAge(e.target.value)
-    }
+    const nameInputRef = useRef()
+    const ageInputRef = useRef()
 
     const handleAddUser = (e) => {
         e.preventDefault()
+        const username = nameInputRef.current.value
+        const age = ageInputRef.current.value
         if (!fieldValidation(username) || !fieldValidation(age)) {
             setError({title: 'Invalid Input', message: 'Please enter a valid name and age (non-empty values).'})
             return
@@ -28,8 +23,8 @@ const UsersForm = (props) => {
             return
         }
         props.onAddUser({username, age})
-        setUsername('')
-        setAge('')
+        nameInputRef.current.value = ''
+        ageInputRef.current.value = ''
     }
 
     const handleDismissModal = () => {
@@ -50,9 +45,9 @@ const UsersForm = (props) => {
             <BaseCard className={styles.input}>
                 <form onSubmit={handleAddUser}>
                     <label htmlFor="username">Username</label>
-                    <input id="username" type="text" onChange={handleChangeUsername} value={username}/>
+                    <input id="username" type="text" ref={nameInputRef}/>
                     <label htmlFor="age">Age (Years)</label>
-                    <input id="age" type="number" onChange={handleChangeAge} value={age}/>
+                    <input id="age" type="number" ref={ageInputRef}/>
                     <BaseButton type="submit">Add User</BaseButton>
                 </form>
             </BaseCard>
